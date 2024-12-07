@@ -27,13 +27,13 @@ public class PlayerJumping : MonoBehaviour
         // Checks if the player is touching any object whose LayerMask is called Ground
         bool groundCheck = Physics2D.OverlapCapsule(ground.position, new Vector2(1, 0.08f), CapsuleDirection2D.Horizontal, 0, groundMask);
 
-        // Check if the player can jump
+        // Check if the player can double jump
         if (Input.GetKeyDown(KeyCode.Space) && !doubleJump)
         {
             rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x, JumpForce);
             doubleJump = true;
         }
-
+        // Check if the player can jump
         if (Input.GetKeyDown(KeyCode.Space) && (groundCheck))
         {
             rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x, JumpForce);

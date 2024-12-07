@@ -26,12 +26,8 @@ public class PlayerStats : MonoBehaviour
 
     // UI 
     public Image heartImage;            // Update the Heart Image of the player 
-    public TextMeshProUGUI coinText;    // Update the text showing coins collected 
-    public GameObject CoinParent;       // Parent we check to see how many coins are in the level 
-
     // Auido 
     public AudioSource deathSFX;  // Death sound effect 
-    public AudioSource coinSFX;   // Coin pick up sound effect 
 
     void Start()
     {
@@ -40,9 +36,7 @@ public class PlayerStats : MonoBehaviour
         // Looks at the Coin Parent Game Object and check how many children it has, thats' the number
         // Of coins that are in the level, each time we destroy a coin the childCount would lower 
         // So we save the inforomation at the start of the game 
-        maxCoins = CoinParent.transform.childCount;
         // Updates the UI to show the proper values of the level 
-        coinText.text = currentCoins + "/" + maxCoins;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -52,11 +46,9 @@ public class PlayerStats : MonoBehaviour
             case coinTag:
                 {
                     // Plays Sound Effect 
-                    coinSFX.Play();
                     // Increase the value of coins by 1
                     currentCoins++;
                     // Updates the UI 
-                    coinText.text = currentCoins + "/" + maxCoins;
                     // Destroys the coins
                     Destroy(collision.gameObject);
                     break;
@@ -65,7 +57,6 @@ public class PlayerStats : MonoBehaviour
             case deathTag:
                 {
                     // Play Sound Effect
-                    deathSFX.Play();
                     // Make the speed zero 
                     rigidbody2D.velocity = Vector2.zero;
                     // Moves the player to the respawn point 
